@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="../static/style.css">
+
+    <!-- Socket.io CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+
+    <!-- My JavaScript -->
+    <script src="../static/main.js"></script>
+
+    <!-- Handle bars CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
+
+    <script id="result" type="text/template">
+      {% raw -%}
+        <li><a href="" data-channel={{ channel }}>{{ channel }}</a></li>
+      {%- endraw %}
+    </script>
+
+    <script id="conversations" type="text/template">
+      {% raw -%} <!-- Escape the jinja template inorder to load the handlebars template-->
+      <!-- {{users_msgs}} -->
+        {{#each users_msgs}}
+          <!-- <p>{{this}}</p> -->
+          <div class="message-div">
+              {{#if this.[3]}}
+                <button class='delete-msg'>x</button>
+              {{/if}}
+              <div id="hidden-msg" hidden>{{this}}</div>
+            <h6 class="display-name">{{ this.[0] }} <span class="timestamp">{{ this.[1] }}</span></h6>
+            <p>{{ this.[2] }}</p>
+          </div>
+        {{/each}}
+      {%- endraw %}
+    </script>
+  </head>
+  <body>
+    <div class="container-fluid wrapper">
+        <div class="row">
+            <div class="col-4 section-left">
+                <h2 id="display-name">{{ username }}</h2>
+                <hr id="myhr">
+                <span style="color: white;">Channels</span>
+                  <button id="add-button" data-toggle="modal" data-target="#addChannelModal"><i class="fa fa-plus"></i></button>
+                <div class="channels-div">
+                  <ul id="channels">
+                    {% for channel in channels %}
+                      <li id="{{channel}}"><a href="" class="channel-link" data-channel={{channel}}>{{ channel }}</a></li>
+                    {% endfor %}
+                  </ul>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="addChannelModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <div style="flex-direction:column;">
+                            <h4 class="modal-title">Create a channel</h4>
+                            <p>Channels are where your team communicates. They’re best when organized around a topic — #marketing, for example.</p>
+                         </div>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                          
+                        </div>
+                        
+                        <div class="modal-body">
+                          <form id="create-channel-form"> 
+                            <div>
+                              <label for="channel" class="col-form-label">Name:</label>
+                              <div id="user-exists"></div>
+                            </div>
+                            <div class="input-group mb-2">  
+                              <div class="input-group-prepend">
+                                <div class="input-group-text">#</div>
+                              </div>
+                              <input type="text" class="form-control" id="channel" placeholder="e.g. cs50-project2" autocomplete="off" autofocus>
+                            </div>
+                            <button id="create-channel-button" type="submit" class="btn btn-dark">Create</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+                
+            </div>
+            <div class="col section-right">
+              <h1 id="channel-name"></h1>
+              <hr>
+              <div id="msgs"></div>
+              <form id="msg-form">
+                <div class="input-group mb-3 send-msg">
+                  <input id="msg" type="text" class="form-control" placeholder="Type a message" autofocus >
+                  <div class="input-group-append">
+                    <button id="send" type="submit"><i class="fa fa-paper-plane-o"></i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

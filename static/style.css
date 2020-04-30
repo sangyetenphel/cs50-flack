@@ -1,0 +1,212 @@
+body{
+    background-color: whitesmoke;
+    overflow: hidden;
+}
+
+.center{
+    margin: 10vh auto;
+    text-align: center;
+    background-color: white;
+}
+
+.section-right{
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+}
+
+#msgs{
+    width: 100%;
+    overflow-y: auto;
+    height: 80%;
+}
+
+.send-msg{
+    left: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+.section-left{
+    height: 100vh;
+    background-color: rgb(48, 46, 46);
+}
+
+#channels{
+    list-style-type: '# ';
+    color: grey; 
+    padding: 10px 20px;
+}
+
+#channels li a{
+    color: grey;
+    text-decoration: none;
+}
+
+.channels-div{
+    width: 100%;
+    height: 90%;
+    overflow-y: auto;
+    margin: 0px;
+}
+
+.channels select{
+    width: 80%;
+}
+
+#channels li:hover{
+    color: white;
+}
+
+#channels li:hover a {
+    color: white;
+}
+
+
+#myhr{
+    border: 1px solid whitesmoke;
+}
+
+#add-button{
+    float: right;
+    /* width: 20%; */
+    font-size: 12px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    padding: 0 5px;
+}
+
+#add-button:hover{
+    background-color: rgba(94, 94, 94, 0.8);
+}
+
+
+.modal-header{
+    border-bottom: 0 none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.modal-header h4{
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.modal-header p{
+    font-size: 14px;
+    color: gray;
+}
+
+.modal-body{
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.modal-body button{
+    float: right;
+    margin-top: 30px;
+}
+
+.delete-msg{
+    background-color: rgba(0, 0, 0, 0);
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: black;
+    border: none;
+    margin: 2px;
+}
+
+.delete-msg:hover{
+    background-color: rgb(238, 238, 238);
+    border-radius: 50%;
+    color: rgb(78, 78, 78);
+    border-color: white;
+}
+
+.delete-msg:focus {
+    outline: none;
+}
+
+
+#display-name{
+    color: white;
+}
+
+#login-name{
+    color: black;
+}
+
+.display-name{
+    font-weight: bolder;
+}
+
+#channel-name{
+    color: gray;
+    padding-left: 10px;
+}
+
+.timestamp{
+    font-size: smaller;
+    font-style: normal;
+    font-weight: lighter;
+}
+input#msg, input#channel, input#login-name{
+    border: none;
+}
+
+input#msg:focus, input#channel, input#login-name{
+    outline: none;
+    box-shadow: 0 0 0 1px black;
+}
+
+#send{
+    border: 0px;
+    border-radius: 15px;
+    margin:0 5px;
+}
+
+
+@keyframes delete {
+    0% {
+        opacity: 1;
+        height: 60px;
+        line-height: 10px;
+        padding: 5px 20px;
+        margin-bottom: 10px;
+    }
+
+    50% {
+        opacity: 0;
+        height: 60px;
+        line-height: 10px;
+        padding: 5px 20px;
+        margin-bottom: 10px;   
+    }
+    
+    100% {
+        background-color: tomato;
+        opacity: 0;
+        height: 0px;
+        line-height: 0px;
+        padding: 0px;
+        margin-bottom: 0px;
+    }
+}
+
+
+.message-div{
+    position: relative;
+    background-color: rgb(230, 230, 230);
+    height: 60px;
+    line-height: 10px;
+    padding: 5px 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    
+    animation-name: delete;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
